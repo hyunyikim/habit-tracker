@@ -4,14 +4,16 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: "./src/index.js",
+    main: "./src/index.tsx",
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   devServer: {
     hot: true,
   },
+  devtool: "source-map",
+
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
@@ -26,6 +28,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
       },
     ],
   },
